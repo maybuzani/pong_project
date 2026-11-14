@@ -119,6 +119,7 @@ public class Board extends JComponent implements Runnable, KeyListener {
                 break;
         }
     }
+
     @Override
     public void keyReleased(KeyEvent e) {
     }

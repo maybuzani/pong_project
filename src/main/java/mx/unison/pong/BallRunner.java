@@ -36,7 +36,6 @@ public class BallRunner implements Runnable {
         ball.y = ballY;
         isPaused = false;
     }
-
     public synchronized void pause() {
         state = GameState.PAUSED;
     }
