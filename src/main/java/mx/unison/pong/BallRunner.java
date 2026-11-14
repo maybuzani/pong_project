@@ -72,18 +72,30 @@ public class BallRunner implements Runnable {
             if (state == GameState.STOPPED) break;
 
             if (paddle.intersects(ball)) {
-                directionY = directionY * SIGN;
+                directionY = -1;
+                ballY = (int) paddle.getPaddle().getMinY() - (int) ball.height; // Evita que atraviese la raqueta
             }
 
-            if (ball.getMinY() < 0 || ball.getMaxY() > MAX_Y) {
-                directionY = directionY * SIGN;
+            // Colisión límite superior
+            if (ball.getMinY() < 0) {
+                directionY = 1;
             }
 
-            if (ball.getMinX() < 0 || ball.getMaxX() > MAX_X) {
-                directionX = directionX * SIGN;
+            // Colisión paredes laterales
+            if (ball.getMinX() < 0) {
+                directionX = 1;
+            } else if (ball.getMaxX() > MAX_X) {
+                directionX = -1;
             }
 
-            // Corrección de multiplicación y signos
+            // Límite inferior: Pelota perdida (reiniciar al centro)[cite: 1]
+            if (ball.getMaxY() > MAX_Y) {
+                ballX = 320;
+                ballY = 240;
+                directionY = -1;
+            }
+
+            // Actualización de posición con multiplicación correcta
             ballX = ballX + (DX * directionX);
             ballY = ballY + (DY * directionY);
 
