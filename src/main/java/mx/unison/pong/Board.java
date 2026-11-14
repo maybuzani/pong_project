@@ -28,6 +28,10 @@ public class Board extends JComponent implements Runnable, KeyListener {
                 BORDER_THICKNESS, BORDER_THICKNESS,
                 BORDER_THICKNESS, BORDER_THICKNESS, Color.BLACK));
 
+        // Garantizar que el tablero reciba los eventos del teclado sin depender de un foco frágil
+        setFocusable(true);
+        requestFocusInWindow();
+
         // Inicialización de componentes del modelo de juego
         ball = new Ellipse2D.Double(20, 320, 20, 20);
         paddle = new Paddle();
